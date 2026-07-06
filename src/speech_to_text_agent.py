@@ -1,15 +1,10 @@
-import os
-import json
-from groq import Groq
+from config import STT_MODEL
+from agent import Agent
 
 
-from config import GROQ_API_KEY, STT_MODEL
-
-
-
-class SpeechToTextAgent:
+class SpeechToTextAgent(Agent):
 	def __init__(self):
-		self.client = Groq(api_key=GROQ_API_KEY)
+		super().__init__()
 
 
 	def get_text_from_audio(self, file_path):
