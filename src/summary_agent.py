@@ -8,7 +8,7 @@ class SummaryAgent(Agent):
 		super().__init__()
 
 
-	def summarise_text(self, text_transcription):
+	def summarise_text(self, transcription_text):
 
 		chat_completion = self.client.chat.completions.create(
 			messages=[
@@ -18,7 +18,7 @@ class SummaryAgent(Agent):
 				},
 				{
 					"role": "user",
-					"content": text_transcription,
+					"content": transcription_text,
 				}
 			],
 			model=LLM_MODEL,
@@ -34,8 +34,8 @@ class SummaryAgent(Agent):
 if __name__ == "__main__":
 	summary_agent_object = SummaryAgent()
 
-	text_transcription = Agent.read_file("./data/text_transcription.txt")
+	transcription_text = Agent.read_file("./data/transcription_text.txt")
 
-	text_summary_dict = summary_agent_object.summarise_text(text_transcription)
+	text_summary_dict = summary_agent_object.summarise_text(transcription_text)
 	
 	print(text_summary_dict)
