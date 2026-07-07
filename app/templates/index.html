@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="page">
+  <header class="page-header">
+    <h1>MD5-scribe</h1>
+    <p class="subtitle">Enregistrez un message vocal, obtenez un rapport synthétique.</p>
+  </header>
+
+  <form id="record-form"
+        hx-post="/report"
+        hx-target="#report-container"
+        hx-swap="innerHTML"
+        hx-encoding="multipart/form-data"
+        hx-indicator="#loading-indicator">
+    <input type="file" name="audio" id="audio-input" hidden>
+  </form>
+
+  <section class="recorder">
+    <div class="recorder-controls">
+      <button id="start-btn" type="button" class="btn btn-primary">Démarrer l'enregistrement</button>
+      <button id="stop-btn" type="button" class="btn btn-secondary" disabled>Arrêter</button>
+    </div>
+
+    <div id="recording-indicator" class="recording-indicator hidden">
+      <span class="pulse-dot"></span> Enregistrement… <span id="timer">0:00</span>
+    </div>
+
+    <div id="mic-error" class="error-banner hidden"></div>
+  </section>
+
+  <div id="loading-indicator" class="htmx-indicator loading-indicator">
+    <span class="spinner"></span> Génération du rapport…
+  </div>
+
+  <section id="report-container" class="report-container"></section>
+</main>
+{% endblock %}

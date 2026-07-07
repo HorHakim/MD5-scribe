@@ -1,4 +1,4 @@
-from config import LLM_MODEL
+from config import LLM_MODEL, PROMPTS_DIR
 from agent import Agent
 
 import json
@@ -15,7 +15,7 @@ class ModeratorAgent(Agent):
 			messages=[
 				{
 					"role": "system",
-					"content": Agent.read_file("./prompts/moderator_prompt_system.txt")
+					"content": Agent.read_file(str(PROMPTS_DIR / "moderator_prompt_system.txt"))
 				},
 				{
 					"role": "user",

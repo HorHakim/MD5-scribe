@@ -1,6 +1,12 @@
-from speech_to_text_agent import SpeechToTextAgent 
+from speech_to_text_agent import SpeechToTextAgent
 from summary_agent import SummaryAgent
 from moderator_agent import ModeratorAgent
+
+
+class PromptInjectionDetected(Exception):
+	def __init__(self, reason: str):
+		self.reason = reason
+		super().__init__(reason)
 
 
 class ManagerAgent:
@@ -14,10 +20,9 @@ class ManagerAgent:
 	def summaries_audio(self, audio_file_path):
 		transcription_text = self.speech_to_text_agent_object.get_text_from_audio(audio_file_path)
 		moderation_dict = self.moderator_agent.moderate_transcript(transcription_text)
-		
+
 		if moderation_dict["prompt_injection"]:
-			raise(Exception(moderation_dict["raison"]))
-			return None
+			raise PromptInjectionDetected(moderation_dict["raison"])
 		else :
 			text_summary_dict = self.summary_agent_object.summarise_text(transcription_text)
 			return text_summary_dict
