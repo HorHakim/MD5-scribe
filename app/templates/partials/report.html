@@ -1,0 +1,43 @@
+<article class="report-card">
+  <h2>{{ report.titre }}</h2>
+  <p class="report-summary">{{ report.resume }}</p>
+
+  <div class="report-section">
+    <h3>Points clés</h3>
+    {% if report.points_cles %}
+    <ul>
+      {% for point in report.points_cles %}
+      <li>{{ point }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">Aucun point clé identifié.</p>
+    {% endif %}
+  </div>
+
+  <div class="report-section">
+    <h3>Décisions</h3>
+    {% if report.decisions %}
+    <ul>
+      {% for decision in report.decisions %}
+      <li>{{ decision }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">Aucune décision actée.</p>
+    {% endif %}
+  </div>
+
+  <div class="report-section">
+    <h3>Actions</h3>
+    {% if report.actions %}
+    <ul>
+      {% for action in report.actions %}
+      <li>{{ action }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="muted">Aucune action à suivre.</p>
+    {% endif %}
+  </div>
+</article>
